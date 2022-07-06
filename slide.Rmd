@@ -1,0 +1,27 @@
+---
+title: "Shiny로 네이버 뉴스 검색하기"
+description: |
+  koscrap 패키지로 Naver 뉴스를 스크랩하고, 간단한 텍스트 분석을 수행합니다. 
+site: distill::distill_website
+output:
+  distill::distill_article:
+    toc: true
+    toc_depth: 3  
+author:
+  - name: 유충현 
+    url: https://choonghyunryu.github.io/
+    affiliation: 한국R사용자회
+date: 2022-07-09    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## 발표 슬라이드
+
+* 주제:
+  - Shiny로 네이버 뉴스 검색하기
+* 발표 문서:
+  - HTML5 문서 (created xaringan in R)
+  - [슬라이드](slide/shiny_news_scrap/shiny_news_scrap.html){target="_blank"}

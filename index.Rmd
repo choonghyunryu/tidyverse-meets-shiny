@@ -1,0 +1,67 @@
+---
+title: "미트업 개요"
+description: |
+  본 미트업은 **Shiny 개념의 이해**를 돕고, 텍스트 데이터를 수집하고 분석을 수행하는 기능의 **어플리케이션을 공유**하여, **Shiny 앱 개발 여정의 디딤돌**을 놓는 것을 목적으로 합니다. 
+site: distill::distill_website
+output:
+  distill::distill_article:
+    toc: true
+    toc_depth: 3  
+author:
+  - name: 유충현 
+    url: https://choonghyunryu.github.io/
+    affiliation: 한국R사용자회
+date: 2022-07-09    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## 프로그램 개요
+
+* 주제:
+  - 시민 데이터 과학 (통계/인공지능), 이광춘
+  - **Shiny로 네이버 뉴스 검색하기**, 유충현
+
+* 일시:
+  - 2022년 7월 9일 (토) 10:00 ~ 12:30
+* 장소:
+  - 성균관대학교 퇴계인문관
+  
+* 주최:
+  -  Seoul R Meetup Group
+
+## 발표자
+* 유충현:
+  - 현) 한국R사용자회 대표
+  - 현) 한화생명 Data Analytics팀 부장
+  
+## 미트업 내용
+* **Shiny 애플리케이션 개발의 ABC**
+  - 아젠다
+      - Shiny 애플리케이션의 이해
+      - 간단한 애플리케이션 개발하기
+  - 목적
+      - Shiny 앱의 동작을 이해하고, 간단한 어플리케이션 개발을 위한 자신감 갖기
+      - 네이버 뉴스 수집과 간단한 텍스트 분석 수행하기
+
+## 사전 준비 작업
+
+### 네이버 검색 API 이용을 위해 애플리케이션 등록
+
+1. 네이버 회원가입과 개발자센터 접속
+    - [네이버 개발자센터](https://developers.naver.com/){target="_blank"} 접속
+2. 애플리케이션등록 신청
+    - [애플리케이션 등록](https://developers.naver.com/apps/#/register){target="_blank"} 화면 이동 후,
+    - 사용 API로 **검색** 선택 후
+    - 비로그인 오픈 API 서비스 환경으로 **WEB 설정** 선택 후 등록하기
+3.  kosacap 패키지의 설치
+    - 공공데이터 및 네이버 뉴스 스크랩하는 패키지
+    - 설치
+        - remotes::install_github("choonghyunryu/koscrap")
+
+      
+
+
+
