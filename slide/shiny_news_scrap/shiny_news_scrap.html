@@ -9,6 +9,8 @@
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
@@ -43,28 +45,25 @@ layout: true
 &lt;br&gt;
 
 .pull-left[
-### .pink[유충현]
+### .pink[발표자 소개]
 .pink[
 - 현) 한화생명 Data Analytics팀
 - 현) 한국R사용자회 대표
 - 다수의 데이터 분석 프로젝트 수행 
 - 데이터 분석 솔루션 개발
-- 현) 분석가인지 개발자인지 정체성 혼란중
+- 현) 분석가? 개발자? 정체성 혼란중
 ]
 ]
 .pull-right[
-### .light-blue[저작물]
+### .light-blue[자료소개]
 .light-blue[
-- 저서:
-  - C로 배우는 통계학 (1994)
-  - S-PLUS를 이용한 통계학 이해 (1997)
-  - R 그래픽스 (2005)
-  - R 프로그래밍 (2010)
-  - R을 이용한 통계학의 이해 (2013)
-  - R을 활용한 데이터 시각화 (2015) 
-- R 패키지:
-  - dlookr
-  - alookr
+- 데이터 수집기 개발:
+  - [네이버 오픈 API 데이터 수집](https://choonghyunryu.github.io/tidyverse-meets-shiny/open_api.html)외 2개 웹페이지
+- Shiny 어플리케이션 개발:
+  - [네이버 뉴스 검색 애플리케이션](https://choonghyunryu.github.io/tidyverse-meets-shiny/news_app.html)외 5개 웹페이지
+- 슬라이드 노트:
+  - [Shiny로 네이버 뉴스 검색하기](https://choonghyunryu.github.io/tidyverse-meets-shiny/slide.html)
+
 ]
 ]
 
@@ -124,17 +123,56 @@ class: middle
 
 ## 분석이라 쓰고 개발이라 읽습니다!!!
 
-.small[
-
-]
-
 .tip[
-하루 종일 **텍스트를 탐색하며, 정제하고 분석의 실마리를 위한 패턴을 찾고**...&lt;br&gt;
-오늘도 그리고 내일도 또...&lt;br&gt;
-분석의 수율을 높이기 위해서 대충할 수 없는, 아 **텍스트 전처리 작업**. 
+간단한 toy 앱을 어렵지 않게 작성합니다. 
+
+**복잡한 비즈니스 로직과 분석을 구현**하면서, **분석가가 아닌 개발자의 모습을 발견**합니다.&lt;br&gt;
 ]
 
-&lt;img src="img/news-list.jpg" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;br&gt;
+
+.small[
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Shiny 활용 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Toy Shiny &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Custom Shiny &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Enterprise Shiny &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 주된 활용 분야 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 재미와 학습 수준의 활용 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 연구 및 가벼운 응용 프로그램 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 비즈니스 요건의 구현 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 구현의 난이도 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 저 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 중 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 고 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 유지보수 난이도 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 없음 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 중간 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 아주 높음 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 마인드 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 관심 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 열정 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 의무 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 요구사항 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; R 언어 소양 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 웹 어플리케이션 이해 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JS, CSS, 프레임워크, 보안, DevOps, ... &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
 
 ---
 
@@ -242,17 +280,46 @@ class: middle
 
 class: middle
 
-# Shiny 앱 개발이란 이런 것이다!
+# 주요 기능 소개
 
 ---
 
-class: middle
+## API 키 핸들링
 
-# .hand[We...]
+.tip[ 
+**입력의 번거로움을 없애고 싶습니다.**
 
-.huge[.green[have]] .hand[텍스트 데이터와 관련 정형데이터]
+**그렇다고 하드코딩으로 소스에 기술하면 안됩니다.**
+]
 
-.huge[.pink[want]] .hand[텍스트에 내포된 화자의 의도 패턴을 활용 목적에 맞게 이해]
+* 시나리오
+  - 소스의 배포 과정에서 API 키가 묻어 나가면 안됩니다.
+  
+* 구현
+  - 최초 사용 시 1회 입력
+      - 이때 API 키를 base64 인코딩으로 히든 파일에 저장
+  - 이후 파일을 읽어, 사용자 입력을 패스
+  - git 배포를 전제로 .gitignore에 히든 파일 등록  
+
+---
+
+## 워드 클라우드
+
+.tip[ 
+**뉴스에 발화되는 명사들을 살펴보고 싶습니다.**
+
+**좋은 토크나이저는 무엇인가요?**
+]
+
+* 형태소 분석
+  - **은전한닢 형태소분석기** with MeCab
+      - 시스템 사전에 NIADic 추가 
+  - **bitTA** with RMeCab
+  - 속도가 빠르고 성능이 좋음
+
+* 로직
+  - 개별 뉴스 요약에서 일반명사(NNG) 추출
+  - 개별 추출 일반명사들을 병합하여 시각화 
 
 ---
 

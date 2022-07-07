@@ -26,7 +26,7 @@ library(emo)
 <br>
 
 .pull-left[
-### .pink[유충현]
+### .pink[발표자 소개]
 .pink[
 - 현) 한화생명 Data Analytics팀
 - 현) 한국R사용자회 대표
@@ -38,16 +38,13 @@ library(emo)
 .pull-right[
 ### .light-blue[자료소개]
 .light-blue[
-- [데이터 수집기 개발](http://tidyverse-meets-shiny/docs/slide.html#:~:text=%EB%8D%B0%EC%9D%B4%ED%84%B0-,%EC%88%98%EC%A7%91%EA%B8%B0,-%EA%B0%9C%EB%B0%9C%20%E2%96%BE):
-  - C로 배우는 통계학 (1994)
-  - S-PLUS를 이용한 통계학 이해 (1997)
-  - R 그래픽스 (2005)
-  - R 프로그래밍 (2010)
-  - R을 이용한 통계학의 이해 (2013)
-  - R을 활용한 데이터 시각화 (2015) 
-- R 패키지:
-  - dlookr
-  - alookr
+- 데이터 수집기 개발:
+  - [네이버 오픈 API 데이터 수집](https://choonghyunryu.github.io/tidyverse-meets-shiny/open_api.html)외 2개 웹페이지
+- Shiny 어플리케이션 개발:
+  - [네이버 뉴스 검색 애플리케이션](https://choonghyunryu.github.io/tidyverse-meets-shiny/news_app.html)외 5개 웹페이지
+- 슬라이드 노트:
+  - [Shiny로 네이버 뉴스 검색하기](https://choonghyunryu.github.io/tidyverse-meets-shiny/slide.html)
+
 ]
 ]
 
@@ -111,39 +108,35 @@ knitr::include_graphics("img/bitstat_kor.jpeg")
 
 ## 분석이라 쓰고 개발이라 읽습니다!!!
 
-.small[
-```{r eval=FALSE, echo=FALSE}
-library(dplyr)
-
-method <- c("Statistics", "Machine Learning", "Deep Learning", "Text Mining")
-app <- c("통계적 추론", "이진 분류", "이미지, 텍스트의 인식", "텍스트 의미 파악")
-task <- c(
-  "가설정의 > 모델링", 
-  "변수선택 및 파생 >> 모델적합", 
-  "라벨링 >> 모델적합", 
-  "데이터 정제 > NLP >> 모델적합"
-)
-postion <- c("적음", "중간", "적음", "많음")
-
-data.frame(method, app, task, postion) %>% 
-  rename("분석 방법론" = method) %>% 
-  rename("주된 활용 분야" = app) %>% 
-  rename("분석의 중요 태스크" = task) %>% 
-  rename("데이터 조작 작업 비중" = postion) %>%   
-  kableExtra::kbl(booktabs = TRUE) %>% 
-  kableExtra::kable_styling()
-```
-]
-
 .tip[
-하루 종일 **텍스트를 탐색하며, 정제하고 분석의 실마리를 위한 패턴을 찾고**...<br>
-오늘도 그리고 내일도 또...<br>
-분석의 수율을 높이기 위해서 대충할 수 없는, 아 **텍스트 전처리 작업**. 
+간단한 toy 앱을 어렵지 않게 작성합니다. 
+
+**복잡한 비즈니스 로직과 분석을 구현**하면서, **분석가가 아닌 개발자의 모습을 발견**합니다.<br>
 ]
 
-```{r echo=FALSE, out.width="95%"}
-knitr::include_graphics("img/news-list.jpg")
+<br>
+
+.small[
+```{r eval=TRUE, echo=FALSE}
+library(dplyr)
+method <- c("Toy Shiny", "Custom Shiny", "Enterprise Shiny")
+app <- c("재미와 학습 수준의 활용", "연구 및 가벼운 응용 프로그램", "비즈니스 요건의 구현")
+level <- c("저", "중", "고")
+maintain <- c("없음", "중간", "아주 높음")
+mind <- c("관심", "열정", "의무")
+requires <- c("R 언어 소양", "웹 어플리케이션 이해", "JS, CSS, 프레임워크, 보안, DevOps, ...")
+data.frame(method, app, level, maintain, mind, requires) %>% 
+  rename("Shiny 활용" = method) %>% 
+  rename("주된 활용 분야" = app) %>% 
+  rename("구현의 난이도" = level) %>% 
+  rename("유지보수 난이도" = maintain) %>%   
+  rename("마인드" = mind) %>%  
+  rename("요구사항" = requires) %>%    
+  t() %>%   
+  kableExtra::kbl(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(full_width = TRUE)
 ```
+]
 
 ---
 
@@ -257,17 +250,46 @@ knitr::include_graphics("img/wordcloud.jpg")
 
 class: middle
 
-# Shiny 앱 개발이란 이런 것이다!
+# 주요 기능 소개
 
 ---
 
-class: middle
+## API 키 핸들링
 
-# .hand[We...]
+.tip[ 
+**입력의 번거로움을 없애고 싶습니다.**
 
-.huge[.green[have]] .hand[텍스트 데이터와 관련 정형데이터]
+**그렇다고 하드코딩으로 소스에 기술하면 안됩니다.**
+]
 
-.huge[.pink[want]] .hand[텍스트에 내포된 화자의 의도 패턴을 활용 목적에 맞게 이해]
+* 시나리오
+  - 소스의 배포 과정에서 API 키가 묻어 나가면 안됩니다.
+  
+* 구현
+  - 최초 사용 시 1회 입력
+      - 이때 API 키를 base64 인코딩으로 히든 파일에 저장
+  - 이후 파일을 읽어, 사용자 입력을 패스
+  - git 배포를 전제로 .gitignore에 히든 파일 등록  
+
+---
+
+## 워드 클라우드
+
+.tip[ 
+**뉴스에 발화되는 명사들을 살펴보고 싶습니다.**
+
+**좋은 토크나이저는 무엇인가요?**
+]
+
+* 형태소 분석
+  - **은전한닢 형태소분석기** with MeCab
+      - 시스템 사전에 NIADic 추가 
+  - **bitTA** with RMeCab
+  - 속도가 빠르고 성능이 좋음
+
+* 로직
+  - 개별 뉴스 요약에서 일반명사(NNG) 추출
+  - 개별 추출 일반명사들을 병합하여 시각화 
 
 ---
 
